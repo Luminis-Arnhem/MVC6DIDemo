@@ -1,0 +1,21 @@
+﻿@model IEnumerable<DIDemo.Models.DemoModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<h3>MVC 6 Dependency Injection Demo</h3>
+<br />
+<table class="table">
+    <tr>
+        <th>Lifetime</th>
+        <th>Call from the HomeController</th>
+        <th>Call from the DemoService</th>
+    </tr>
+    @foreach (var dependencyResult in Model)
+    {
+        <tr>
+            <td>@dependencyResult.Name</td>
+            <td>@dependencyResult.FirstCall</td>
+            <td>@dependencyResult.SecondCall</td>
+        </tr>
+    }
+</table>

@@ -8,9 +8,9 @@ namespace DIDemo.ExampleClasses
     public class InstanceDependencyExample : IInstanceDependencyExample
     {
         public Guid ID { get; set; }
-        public InstanceDependencyExample(Guid id)
+        public InstanceDependencyExample()
         {
-            ID = ID;
+            ID = Guid.NewGuid();
         }
     }
 }

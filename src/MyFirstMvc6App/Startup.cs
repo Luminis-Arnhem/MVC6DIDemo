@@ -9,6 +9,9 @@ using Microsoft.Extensions.Logging;
 using DIDemo.ExampleClasses;
 using DIDemo.Services;
 using Microsoft.AspNet.Routing;
+using Microsoft.AspNet.Mvc;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 
 namespace DIDemo
 {
@@ -29,12 +32,34 @@ namespace DIDemo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
             services.AddTransient<IDemoService, DemoService>();
             services.AddTransient<ITransientDependencyExample, TransientDependencyExample>();
             services.AddScoped<IScopedDependencyExample, ScopedDependencyExample>();
             services.AddSingleton<ISingletonDependencyExample, SingletonDependencyExample>();
             services.AddInstance<IInstanceDependencyExample>(new InstanceDependencyExample());
         }
+
+        /**
+         * Uncomment this method to use Autofac instead of the default dependency container.
+         * /
+            /*
+        public IServiceProvider ConfigureServices(IServiceCollection services)
+        {
+            services.AddMvc();
+            var containerBuilder = new ContainerBuilder();
+
+            containerBuilder.RegisterType<DemoService>().As<IDemoService>().InstancePerDependency();
+            containerBuilder.RegisterType<TransientDependencyExample>().As<ITransientDependencyExample>().InstancePerDependency();
+            containerBuilder.RegisterType<ScopedDependencyExample>().As<IScopedDependencyExample>().InstancePerLifetimeScope();
+            containerBuilder.RegisterType<SingletonDependencyExample>().As<ISingletonDependencyExample>().SingleInstance();
+            containerBuilder.RegisterInstance(new InstanceDependencyExample()).As<IInstanceDependencyExample>();
+
+            containerBuilder.Populate(services);
+            var container = containerBuilder.Build();
+            return container.Resolve<IServiceProvider>();
+        }
+        */
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

@@ -5,6 +5,8 @@
   },
 
   "dependencies": {
+    "Autofac": "4.0.0-rc1-177",
+    "Autofac.Extensions.DependencyInjection": "4.0.0-rc1-177",
     "EntityFramework.Core": "7.0.0-rc1-final",
     "Microsoft.AspNet.Diagnostics": "1.0.0-rc1-final",
     "Microsoft.AspNet.Identity": "3.0.0-rc1-final",
@@ -27,7 +29,10 @@
   },
 
   "frameworks": {
-    "dnx451": { },
+    "dnx451": {
+      "dependencies": {
+      }
+    },
     "dnxcore50": { }
   },
 

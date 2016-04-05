@@ -62,10 +62,10 @@ namespace DIDemo.Controllers
             return View(list);
         }
 
-        public IActionResult About([FromServices] ISingletonDependencyExample singletonDependencyExample)
+        public IActionResult About([FromServices] ITransientDependencyExample transientDependencyExample)
         {
             ViewData["Message"] = "Your application description page.";
-            ViewBag.ID = singletonDependencyExample.ID;
+            ViewBag.ID = transientDependencyExample.ID;
             return View();
         }
     }
